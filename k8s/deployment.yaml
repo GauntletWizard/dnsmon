@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dnsmon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dnsmon
+  template:
+    metadata:
+      name: dnsmon
+      labels:
+        app: dnsmon
+    spec:
+      containers:
+      - name: dnsmon
+        image: gauntletwizard/dnsmon:latest
+        args:
+        - "api2-prod-alb.secrethouse.party"
+        - "api2-prod.secrethouse.party"
+        - "api2.thehousepartyapp.com"
+        - "hpapi.meerkatapp.co"
+        - "party.yevvo.com"
+        - "api2-staging.secrethouse.party"
+        - "api2-staging2.secrethouse.party"
+        ports:
+        - name: dnsmon
+          containerPort: 7999
