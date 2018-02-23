@@ -32,7 +32,7 @@ def main():
         for host in args.hosts:
             try:
                 result = set(resolver.query(host))
-            except e:
+            except:
                 errors.labels(host=host, type='A').inc(1)
                 result = set()
             records.labels(host=host, type='A').set(len(result))
